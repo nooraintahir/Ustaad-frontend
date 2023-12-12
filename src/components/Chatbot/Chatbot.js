@@ -20,7 +20,23 @@ function formatGptResponse(response) {
       skipParagraph = false;
     }
     
-    
+    // Check if the paragraph is a code block
+    else if (paragraph.includes("```cpp") || paragraph.includes("```C++")) {
+    // Find the index of the closing ``` tag
+    const closingIndex = paragraphs.findIndex((p, i) => i > index && p.includes("```"));
+
+    // Extract the code block content
+    const codeBlockContent = paragraphs.slice(index + 1, closingIndex).join("\n");
+
+    // Highlight code block in light gray box with light blue text
+    formattedParagraphs.push(
+      <div key={index} style={{ backgroundColor: '#f2f2f2', padding: '10px', borderRadius: '5px',  textAlign: 'justify', marginBottom: "10px" }}>
+        <code style={{ whiteSpace: 'pre-line',  textAlign: 'justify', color: "#423fa6"}}>{codeBlockContent}</code>
+      </div>
+    );
+
+    skipParagraph = true;
+   }
 
     // Check if the paragraph contains bold text
     else if (paragraph.includes("**")) {
@@ -43,23 +59,7 @@ function formatGptResponse(response) {
       skipParagraph = false;
     }
 
-    // Check if the paragraph is a code block
-    else if (paragraph.includes("```cpp") || paragraph.includes("```C++")) {
-      // Find the index of the closing ``` tag
-      const closingIndex = paragraphs.findIndex((p, i) => i > index && p.includes("```"));
 
-      // Extract the code block content
-      const codeBlockContent = paragraphs.slice(index + 1, closingIndex).join("\n");
-
-      // Highlight code block in light gray box with light blue text
-      formattedParagraphs.push(
-        <div key={index} style={{ backgroundColor: '#f2f2f2', padding: '10px', borderRadius: '5px',  textAlign: 'justify', marginBottom: "10px" }}>
-          <code style={{ whiteSpace: 'pre-line',  textAlign: 'justify', color: "#423fa6"}}>{codeBlockContent}</code>
-        </div>
-      );
-
-      skipParagraph = true;
-    }
 
     // Default: render as a regular paragraph
     else if (!skipParagraph) {

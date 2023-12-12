@@ -1,212 +1,3 @@
-/*import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import './Questions.css';
-import { useParams } from "react-router-dom";
-import QuestionsPage from "../DailyExercises/frontend";
-
-import axios from "axios";
-
-
-function Questions(){ 
-    const [details, setDetails] = useState([]); 
-    const { difficulty } = useParams();
-    useEffect(() => {
-        // Axios request inside useEffect
-        axios.get('http://localhost:8000')
-          .then(res => {
-            setDetails(res.data);
-           
-          })
-          .catch(err => {
-            console.error(err);
-           
-          });
-      }, [difficulty]); 
-
-
-
-
-      return (
-        <div>
-            <Container fluid className="qcontent">
-                <Container>
-                    <Row style={{ justifyContent: "center", padding: "10px" }}>
-                        <Col
-                            md={7}
-                            style={{
-                                justifyContent: "center",
-                                paddingTop: "5px",
-                                paddingBottom: "10px",
-                            }}
-                        >
-
-                    {details.length > 0 && (
-                <header style={{ fontSize: "70px" }}>
-                     <strong classname="purple">Questions for {difficulty} difficulty:</strong>
-                {/*
-                <strong className="purple">{details[0].title}</strong>
-                    }
-                  <hr></hr>
-                </header>
-              )}
-             
-
-                    {details.map((output, id) => (
-                     <div key={id} className="difficultyLevel" >
-                     {id % 10 === 0 ? (
-                       <h1 style={{fontSize: "20px" }}>
-                         <strong className="tech-icons">{details[20].difficulty_level}</strong>
-                       </h1>
-                     ) : null}
-                   
-                     
-                     <div className="questionContainer">
-                       <h4>{output.question}</h4>
-                     </div>
-                   </div>
-                 ))}
-                       </Col>
-                    </Row>
-                </Container>
-            </Container>
-        </div>
-    )   
-}
-
-
-
-
-     
-/*
-    return(
-            <div>
-
-
-<Container fluid className="qcontent">
-     
-      <Container>
-        <Row style={{ justifyContent: "center", padding: "10px" }}>
-          <Col
-            md={7}
-            style={{
-              justifyContent: "center",
-              paddingTop: "30px",
-              paddingBottom: "50px",
-            }}
-          >
-            <h1 style={{ fontSize: "2.1em", paddingBottom: "20px" }}>
-              Know Who <strong className="purple">I'M</strong>
-            </h1>
-          </Col>
-
-<header> GOT IT FINALLY </header>
-        <hr></hr>
-        {details.map((output, id) => (
-          <div key={id}>
-            <div classname = "qcontent">
-              <h2>{output.title}</h2>
-              <h3>{output.difficulty_level}</h3>
-              <h4>{output.question}</h4>
-            </div>
-          </div>
-        ))}
-        </Container>
-            </Container>
-            </div>
-        
-    
-    )   
-}
-*/
-//export default Questions;
-
-/*
-import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import './Questions.css';
-import { useParams } from "react-router-dom";
-import axios from "axios";
-
-function Questions() {
-  const [details, setDetails] = useState([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const { difficulty } = useParams();
-
-  useEffect(() => {
-    // Axios request inside useEffect to fetch questions based on difficulty
-    axios.get(`http://localhost:8000?difficulty=${difficulty}`)
-      .then(res => {
-        setDetails(res.data);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  }, [difficulty]);
-
- 
-  const checkdifficultylevel = () => {
-    if (difficulty === details[0].difficulty_level) {
-     setCurrentQuestionIndex(0)}
-      if (difficulty === details[10].difficulty_level) {
-        setCurrentQuestionIndex(10)}
-        if (difficulty === details[20].difficulty_level) {
-          setCurrentQuestionIndex(10)}
-      
-  };
-  
-  const nextQuestion = () => {
-    checkdifficultylevel()
-    if (currentQuestionIndex < details.length - 1 && currentQuestionIndex < 9) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    }
-  };
-
-
-
-
-  return (
-    <div>
-      <Container fluid className="qcontent">
-        <Container>
-          <Row style={{ justifyContent: "center", padding: "10px" }}>
-            <Col
-              md={7}
-              style={{
-                justifyContent: "center",
-                paddingTop: "5px",
-                paddingBottom: "10px",
-             
-              }}
-            >
-
-              {details.length > 0 && (
-                <header style={{ fontSize: "70px" }}>
-                  <strong className="purple">Question for {difficulty} difficulty:</strong>
-                  <hr />
-                </header>
-              )}
-
-              {details.length > 0 && currentQuestionIndex < details.length && (
-                <div className="questionContainer">
-                  <h4>{details[currentQuestionIndex].question}</h4>
-                </div>
-              )}
-
-              {details.length > 0 && currentQuestionIndex < details.length - 1 && (
-                <Button onClick={nextQuestion}>Next</Button>
-              )}
-
-            </Col>
-          </Row>
-        </Container>
-      </Container>
-    </div>
-  );
-}
-
-export default Questions;
-*/
-
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import './Questions.css';
@@ -229,6 +20,7 @@ function Questions() {
   const [cppCode, setCppCode] = useState("");
   const [compilerResult, setCompilerResult] = useState(null);
   const [checkingStatus, setCheckingStatus] = useState(false);
+  let compiler = false;
 
   useEffect(() => {
     // Axios request inside useEffect to fetch questions based on difficulty
@@ -282,6 +74,7 @@ function Questions() {
   };
 
   const compileCode = async () => {
+    compiler = true;
     try {
       const response = await fetch("http://localhost:8000/compiler", {
         method: "POST",
@@ -349,25 +142,59 @@ function Questions() {
     setWidth(window.innerWidth);
   }, []);
 
+  const handleRunCode = () => {
+    // Assuming userCode contains the Python code entered by the user
+    const encodedCode = encodeURIComponent(cppCode);
 
-/*
-const nextQuestion = () => {
-  let nextIndex = currentQuestionIndex;
- const[nextMedium, setnextMedium] = usestate(11);
-  if (currentQuestionIndex < details.length - 1) {
-    if (difficulty === "Easy" && currentQuestionIndex < 9) {
-      nextIndex = currentQuestionIndex + 1;
-    } else if (difficulty === "Medium" && currentQuestionIndex < 19) {
-
-      nextIndex = currentQuestionIndex + 1;
-    } else if (difficulty === "Hard" && currentQuestionIndex < 29) {
-      nextIndex = currentQuestionIndex + 1;
+    // Construct the URL for the Python Tutor iframe
+    const pythonTutorURL = `http://pythontutor.com/iframe-embed.html#code=${encodedCode}&cumulative=false&py=cpp_g%2B%2B9.3.0`;
+    // Set the iframe source
+    document.getElementById('pythonTutorIframe').src = pythonTutorURL;
+  };
+  const [userInput, setUserInput] = useState("");
+  const [conversation, setConversation] = useState([]);
+  const [isProcessing, setIsProcessing] = useState(false);
+  
+  const smartCompiler = async (e) => {
+    e.preventDefault();
+    setCheckingStatus(true);
+    setConversation([
+      ...conversation,
+      { role: "user", content: "Code" + cppCode + "Question" + details[currentQuestionIndex].question },
+    ]);
+    setIsProcessing(true); // Set processing to true
+  
+    try {
+      const response = await axios.post("http://localhost:8000/smartcompiler", {
+        user_input: userInput,
+        code: cppCode,
+        question: details[currentQuestionIndex].question,
+      });
+  
+      setConversation([
+        ...conversation,
+        { role: "user", content: userInput },
+        { role: "assistant", content: response.data.message },
+      ]);
+  
+      // Display the response message on the frontend
+      setCompilerResponse(response.data.message);
+    } catch (error) {
+      console.error("Error sending message:", error);
+  
+      // Display an error message on the frontend
+      setCompilerResponse("Submission failed. Please try again.");
+    } finally {
+      setIsProcessing(false); // Reset processing to false after response
     }
-  }
-
-  setCurrentQuestionIndex(nextIndex);
-};
-*/
+    compileCode();
+    compiler = false;
+    setCheckingStatus(false);
+    setUserInput("");
+  };
+  
+  // Add state for the compiler response
+  const [compilerResponse, setCompilerResponse] = useState("");
   
 
   return (
@@ -380,7 +207,7 @@ const nextQuestion = () => {
               style={{
                 justifyContent: "center",
                 paddingTop: "5px",
-                paddingBottom: "10px",
+                paddingBottom: "0px",
               }}
             >
             
@@ -398,7 +225,7 @@ const nextQuestion = () => {
                 </div>
               )}
 
-<div style={{ textAlign: "center"}}>
+          <div style={{ textAlign: "center", marginLeft: "60px"}}>
             <AceEditor
               mode="c_cpp"
               theme="chrome"
@@ -413,48 +240,96 @@ const nextQuestion = () => {
             />
           </div>
           <div>
+
+          <Button
+              onClick={handleRunCode}
+              variant="primary"
+              style={{ maxWidth: "250px", marginTop: "20px", marginRight:"130px" }}
+              disabled={checkingStatus }
+            >
+              Debug
+            </Button>
+
+            <Button
+              onClick={smartCompiler}
+              variant="primary"
+              style={{ maxWidth: "250px", marginTop: "20px", marginRight:"90px" }}
+              disabled={checkingStatus}
+            >
+              Submit
+            </Button>
+
             <Button
               onClick={compileCode}
               variant="primary"
-              style={{ maxWidth: "250px", marginTop: "20px", marginRight:"20px" }}
+              style={{ maxWidth: "250px", marginTop: "20px", marginRight:"60px" }}
               disabled={checkingStatus}
             >
               <AiOutlineDownload />
               &nbsp;Compile
             </Button>
+
+
+
             {details.length > 0 && currentQuestionIndex < details.length - 1 && (
-                <Button onClick={nextQuestion} style={{marginLeft:"20px", marginTop:"20px"}}>Next</Button>
+                <Button onClick={nextQuestion} style={{marginLeft:"50px", marginTop:"20px"}}>Next</Button>
+
+              
               )}
+              
           </div>
           <div style={{ textAlign: "center", marginTop: "20px" }}>
             <pre>
-              {compilerResult && compilerResult.error ? (
+              {compilerResult && compilerResult.error && compiler? (
                 <div>
                   <h3>Error:</h3>
                   <pre>{compilerResult.error}</pre>
                 </div>
               ) : null}
-              {compilerResult && compilerResult.compile_status ? (
+              {compilerResult && compilerResult.compile_status && compiler? (
                 <div>
                   <h3>Error:</h3>
                   <pre>{compilerResult.compile_status}</pre>
                 </div>
               ) : null}
-              {compilerResult && compilerResult.run_status ? (
+              {compilerResult && compilerResult.run_status && compiler? (
                 <div>
                   <h3>Output:</h3>
                   <pre>{compilerResult.run_status.output}</pre>
                 </div>
               ) : null}
             </pre>
+                
           </div>
-              
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
+          {compilerResponse && compilerResponse.includes("Yes") && compilerResult && compilerResult.run_status ? (
+            <p>Great, Your answer is correct!</p>
+          ) : compilerResponse && compilerResponse.includes("No") ? (
+            <p>Your answer is wrong!</p>
+          ) : compilerResponse && compilerResponse.includes("Yes") && compilerResult && compilerResult.compile_status ? (
+            <p>You are on the right track but there are some issues! Please debug your code</p>
+          ) : null}
+          <pre>
+            {/* ... (existing code) */}
+          </pre>
+        </div>
+
+
 
             </Col>
           </Row>
         </Container>
       </Container>
+      <div style={{ justifyContent: 'left' }}>
+        <iframe
+          id="pythonTutorIframe"
+          width="800"
+          height="450"
+          title="Python Tutor"
+        ></iframe>
+      </div>
     </div>
+    
   );
 }
 
