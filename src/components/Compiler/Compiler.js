@@ -7,7 +7,7 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-c_cpp";
 import "ace-builds/src-noconflict/theme-chrome";
 
-function ResumeNew() {
+function Compiler() {
   const [width, setWidth] = useState(1200);
   const [cppCode, setCppCode] = useState("");
   const [compilerResult, setCompilerResult] = useState(null);
@@ -101,7 +101,7 @@ function ResumeNew() {
 
   return (
     <div>
-      <Container fluid className="resume-section">
+      <Container fluid className="compiler-section">
         <Particle />
         <Row style={{ justifyContent: "center", position: "relative" }}>
           <div style={{ textAlign: "center", marginLeft: "700px" }}>
@@ -157,4 +157,4 @@ function ResumeNew() {
   );
 }
 
-export default ResumeNew;
+export default Compiler;

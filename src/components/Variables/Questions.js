@@ -20,7 +20,7 @@ function Questions() {
   const [cppCode, setCppCode] = useState("");
   const [compilerResult, setCompilerResult] = useState(null);
   const [checkingStatus, setCheckingStatus] = useState(false);
-  let compiler = false;
+  let compiler = true;
 
   useEffect(() => {
     // Axios request inside useEffect to fetch questions based on difficulty

@@ -1,0 +1,20 @@
+
+.question-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.question-form {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #551a8b, 0 0 10px #551a8b inset;
+
+}
+
+.text-white {
+  color: #fff;
+}

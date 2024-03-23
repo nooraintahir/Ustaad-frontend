@@ -2,19 +2,11 @@ import React, { useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
-import logo from "../Assets/logo.png";
-import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import { CgGitFork } from "react-icons/cg";
-import { ImBlog } from "react-icons/im";
-import {
-  AiFillStar,
-  AiOutlineHome,
-  AiOutlineFundProjectionScreen,
-  AiOutlineUser,
-} from "react-icons/ai";
+import { AiOutlineHome, AiOutlineUser, AiOutlineFundProjectionScreen, AiOutlineMessage, AiOutlineLogin } from "react-icons/ai";
+import { FaBrain } from "react-icons/fa";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 
-import { CgFileDocument } from "react-icons/cg";
 
 function NavBar() {
   const [expand, updateExpanded] = useState(false);
@@ -38,9 +30,12 @@ function NavBar() {
       className={navColour ? "sticky" : "navbar"}
     >
       <Container>
-        <Navbar.Brand href="/" className="d-flex">
-          <img src={logo} className="img-fluid logo" alt="brand" />
+      <Navbar.Brand href="/" className="d-flex">
+          <FaBrain size={30} style={{ marginRight: '10px' }} />
+          {/* Adjust size and styling as needed */}
+          <span>Ustaad</span>
         </Navbar.Brand>
+
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
           onClick={() => {
@@ -88,13 +83,26 @@ function NavBar() {
                 to="/chatbot"
                 onClick={() => updateExpanded(false)}
               >
-                <CgFileDocument style={{ marginBottom: "2px" }} /> Chatbot
+                <AiOutlineMessage style={{ marginBottom: "2px" }} /> Chatbot
               </Nav.Link>
             </Nav.Item>
 
-          
+            <Nav.Item>
+              <Nav.Link
+                as={Link}
+                to="/login"
+                onClick={() => updateExpanded(false)}
+              >
+                <AiOutlineLogin style={{ marginBottom: "2px" }} /> Login
+              </Nav.Link>
+            </Nav.Item>
 
-          
+            <Nav.Item>
+              <Nav.Link as={Link} to="/add-question" onClick={() => updateExpanded(false)}>
+                <AiOutlineQuestionCircle style={{ marginBottom: "2px" }} /> Add Question
+              </Nav.Link>
+            </Nav.Item>
+            
           </Nav>
         </Navbar.Collapse>
       </Container>

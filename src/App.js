@@ -7,6 +7,9 @@ import About from "./components/About/About";
 import Projects from "./components/Projects/Projects";
 import Footer from "./components/Footer";
 import Chatbot from "./components/Chatbot/Chatbot";
+import Login from "./components/Login/Login";
+import Signup from "./components/Signup/Signup";
+import AddQuestion from "./components/AddQuestion/AddQuestion";
 import Questions from "./components/Variables/Questions";
 import QuestionsPage from "./components/DailyExercises/frontend";
 import {
@@ -23,6 +26,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const [load, updateLoad] = useState(true);
   const [details, setDetails] = useState([]); // State for storing details
+  const [authenticated, setAuthenticated] = useState(false); // State for authentication
 
   useEffect(() => {
     // Axios request inside useEffect
@@ -41,14 +45,17 @@ function App() {
     <Router>
       <Preloader load={load} />
       <div className="App" id={load ? "no-scroll" : "scroll"}>
-        <Navbar />
+        <Navbar authenticated={authenticated} />
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/project" element={<Projects />} />
           <Route path="/about" element={<About />} />
           <Route path="/chatbot" element={<Chatbot />} />
-          <Route path="/questionpage" element={<QuestionsPage />}/>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/add-question" element={<AddQuestion />} />
+          <Route path="/questionpage" element={<QuestionsPage />} />
           <Route path="/questions/:difficulty" element={<Questions /*details={details}*/ />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
