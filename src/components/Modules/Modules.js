@@ -11,7 +11,7 @@ import bitsOfCode from "../../Assets/Projects/blog.png";
 
 
 
-function Projects() {
+function Modules() {
   return (
     <Container fluid className="project-section">
       <Particle />
@@ -109,4 +109,4 @@ function Projects() {
   );
 }
 
-export default Projects;
+export default Modules;

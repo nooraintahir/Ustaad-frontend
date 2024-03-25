@@ -1,23 +1,15 @@
+// ProjectCards.js
+
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { CgWebsite } from "react-icons/cg";
-import { BsGithub } from "react-icons/bs";
-import Questions from "../Variables/Questions";
-import QuestionsPage from "../DailyExercises/frontend";
-import { Link } from "react-router-dom"
-
-
-const displayQ = () => {
-  return (
-     // <Questions />
-     <QuestionsPage/>
-
-  )
-}
-
+import { Link } from "react-router-dom";
 
 function ProjectCards(props) {
+  // Function to remove spaces from the title
+  const formattedTitle = props.title.replace(/\s+/g, ''); // Remove all spaces
+
   return (
     <Card className="project-card-view">
       <Card.Img variant="top" src={props.imgPath} alt="card-img" />
@@ -27,17 +19,16 @@ function ProjectCards(props) {
           {props.description}
         </Card.Text>
 
-        <Link to='/questionpage'>
-        <Button variant="primary" href={props.ghLink} target="_blank" onClick={displayQ}>
-          
-          {props.isBlog ? "Blog" : "Open"}
-        </Button>
+        {/* Construct link with formatted title */}
+        <Link to={`/${formattedTitle}`}>
+          <Button variant="primary">
+            {props.isBlog ? "Blog" : "Open"}
+          </Button>
         </Link>
         {"\n"}
         {"\n"}
 
         {/* If the component contains Demo link and if it's not a Blog then, it will render the below component  */}
-
         {!props.isBlog && props.demoLink && (
           <Button
             variant="primary"
@@ -53,4 +44,5 @@ function ProjectCards(props) {
     </Card>
   );
 }
+
 export default ProjectCards;

@@ -4,13 +4,14 @@ import Particle from "../Particle";
 import { useNavigate } from "react-router-dom";
 import "./AddQuestion.css";
 
-function Signup() {
+function AddQuestion() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [question, setQuestion] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [topic, setTopic] = useState("");
   const [error, setError] = useState(""); // State for holding error messages
+  const [data, setData] = useState({}); // State for holding response data
   const navigate = useNavigate();
 
   const handleNameChange = (e) => {
@@ -37,7 +38,7 @@ function Signup() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/send-question/", {
+      const response = await fetch("http://localhost:8000/sendquestion", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -45,15 +46,9 @@ function Signup() {
         body: JSON.stringify({ name, email, question, difficulty, topic })
       });
       
-      const data = await response.json();
+      const response_message = await response.json();
+      setData(response_message);
 
-      if (response.ok && data.message === "Question sent successfully") {
-        // Redirect to the home page upon successful question submission
-        navigate('/');
-      } else {
-        // Set error state with the error message
-        setError(data.error);
-      }
     } catch (error) {
       // Handle network or server errors
       setError("An error occurred while sending the question. Please try again later.");
@@ -61,10 +56,10 @@ function Signup() {
   };
 
   return (
-    <div className="question-container">
-      <Container fluid className="question-background">
+    <div className="question-container mt-5">
+      <Container fluid className="question-background mt-5">
         <Row className="justify-content-center align-items-center mt-5">
-          <Col md={6}>
+          <Col md={6} className="mt-5" >
             <h1 className="project-heading mb-4 mt-5">Send a question</h1>
             <Form onSubmit={handleSubmit} className="question-form">
               <Form.Group controlId="name" className="mb-4">
@@ -134,6 +129,7 @@ function Signup() {
               </Button>
 
               {error && <div className="text-danger mt-3">{error}</div>} {/* Render error message */}
+              {data.message && <div className="text-success mt-3">{data.message}</div>}
             </Form>
             <Particle />
           </Col>
@@ -143,4 +139,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default AddQuestion;

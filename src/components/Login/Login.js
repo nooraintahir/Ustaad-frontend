@@ -24,6 +24,7 @@ function Login() {
     try {
       const response = await fetch("http://localhost:8000/login/", {
         method: 'POST',
+        withCredentials: true,
         headers: {
           'Content-Type': 'application/json'
         },
