@@ -13,6 +13,7 @@ import Signup from "./components/Signup/Signup";
 import AddQuestion from "./components/AddQuestion/AddQuestion";
 import Compiler from "./components/Compiler/Compiler";
 import Questions from "./components/Questions/Questions";
+import ProgressTracking from "./components/ProgressTracking/ProgressTracking";
 import {
   BrowserRouter as Router,
   Route,
@@ -54,8 +55,11 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/chatbot" element={<Chatbot />} />
             <Route path="/login" element={<Login />} />
+            
             <Route path="/signup" element={<Signup />} />
             <Route path="/add-question" element={<AddQuestion />} />
+            <Route path="/trackprogress" element={<ProgressTracking />} />
+
             <Route path="/:topic/:difficulty" element={<Compiler /*details={details}*/ />} />
             <Route path="/:topic" element={<Questions />} />
             <Route path="*" element={<Navigate to="/" />} />

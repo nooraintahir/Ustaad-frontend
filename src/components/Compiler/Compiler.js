@@ -83,14 +83,24 @@ function Compiler() {
       { role: "user", content: "Code" + cppCode + "Question" + details[currentQuestionIndex].question },
     ]);
     setIsProcessing(true); // Set processing to true
-  
+
+    
+
+   
+
     try {
+      // Send a request to the backend to update the score
+      await axios.post("http://localhost:8000/update-score", {
+        questionId: details[currentQuestionIndex].id, // Assuming you have the question ID available
+      });
+  
       const response = await axios.post("http://localhost:8000/smartcompiler", {
         user_input: userInput,
         code: cppCode,
         question: details[currentQuestionIndex].question,
       });
-  
+
+      
       setConversation([
         ...conversation,
         { role: "user", content: userInput },

@@ -1,0 +1,48 @@
+.chart-container {
+    position: absolute;
+    top: 100px; /* Adjust as needed */
+    left: 220px;
+    display: flex;
+    
+    z-index: 1 !important; /* Adjust as needed */
+}
+
+.chart-containerarithmetic {
+    position: absolute;
+    top: 100px; /* Adjust as needed */
+    left: 800px;
+    display: flex;
+    z-index: 1 !important; /* Adjust as needed */
+}
+
+.chart-Function {
+    position: absolute;
+    top: 640px; /* Adjust as needed */
+    left: 220px;
+    z-index: 1 !important; /* Adjust as needed */
+}
+
+
+.chart-Ifelse {
+    position: absolute;
+    top: 640px; /* Adjust as needed */
+    left: 800px;
+   /* Adjust as needed */
+}
+
+.chart-Loops {
+    position: absolute;
+    top: 1190px; /* Adjust as needed */
+    left: 220px;
+   /* Adjust as needed */
+}
+
+.chart-Arrays {
+    position: absolute;
+    top: 1190px; /* Adjust as needed */
+    left: 800px;
+   /* Adjust as needed */
+}
+
+
+

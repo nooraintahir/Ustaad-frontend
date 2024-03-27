@@ -3,7 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import { Link } from "react-router-dom";
-import { AiOutlineHome, AiOutlineUser, AiOutlineFundProjectionScreen, AiOutlineMessage, AiOutlineLogin } from "react-icons/ai";
+import { AiOutlineHome, AiOutlineUser, AiOutlineFundProjectionScreen, AiOutlineMessage, AiOutlineLogin, AiOutlineAim } from "react-icons/ai";
 import { FaBrain } from "react-icons/fa";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 
@@ -100,6 +100,12 @@ function NavBar() {
             <Nav.Item>
               <Nav.Link as={Link} to="/add-question" onClick={() => updateExpanded(false)}>
                 <AiOutlineQuestionCircle style={{ marginBottom: "2px" }} /> Add Question
+              </Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link as={Link} to="/trackprogress" onClick={() => updateExpanded(false)}>
+                <AiOutlineAim style={{ marginBottom: "2px" }} /> Track Progress
               </Nav.Link>
             </Nav.Item>
             
