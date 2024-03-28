@@ -49,6 +49,7 @@ function Signup() {
 
       if (response.ok && data.message === "Signup successful") {
         // Redirect to the home page upon successful signup
+        sessionStorage.setItem('username', username);
         navigate('/preferences');
       } else {
         // Set error state with the error message

@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import Particle from "../Particle";
+import { useNavigate } from "react-router-dom";
+//import ProjectCard from "./ProjectCards";
+import Particles from "react-tsparticles";
+import "./Lessonplan.css"
+import { DiTravis } from "react-icons/di";
 const LessonPlan = () => {
     const [lessonPlanInfo, setLessonPlanInfo] = useState(null);
 
@@ -41,23 +47,38 @@ const LessonPlan = () => {
         fetchData();
     }, []); // Empty dependency array ensures the effect runs only once
 
-    return (
-        <div>
-        
-            {/* Render lesson plan information */}
-            {lessonPlanInfo && (
-                <div>
-                    <h2>Lesson Plan Information</h2>
-                    <p>Date Only: {lessonPlanInfo.date_only}</p>
-                    <p>Topic: {lessonPlanInfo.topic}</p>
-                    <p>Difficulty: {lessonPlanInfo.difficulty}</p>
-                    <p>Questions to Attempt: {lessonPlanInfo.questions_to_attempt}</p>
-                    <p>Questions Attempted: {lessonPlanInfo.questions_attempted}</p>
-                </div>
-           )}
-            
-        </div>
-    );
-};
 
+    return (
+        <div className="login-container">
+          <Container fluid className="login-background">
+            <Row className="justify-content-center align-items-center">
+              <Col md={6}>
+              <h1 className="project-heading mb-4 mt-3" >Todays's 
+              <strong className="purple">  Lesson Plan </strong></h1>
+              
+
+            <div classname = "login-container2">
+
+            {lessonPlanInfo && (
+                     <div className="tech-icons">
+                     
+                     
+                     <p>Topic: {lessonPlanInfo.topic}</p>
+                     <p>Difficulty: {lessonPlanInfo.difficulty}</p>
+                     <p>Questions to Attempt: {lessonPlanInfo.questions_to_attempt}</p>
+                     <p>Questions Attempted: {lessonPlanInfo.questions_attempted}</p>
+                 </div>
+                        )}
+            </div>
+
+    
+                <Particle />
+    
+              </Col>
+            </Row>
+          </Container>
+        </div>
+      );
+
+    };
 export default LessonPlan;

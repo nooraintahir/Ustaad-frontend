@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Particle from "../Particle";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import "./Preferences.css";
 
 function Preferences() {
     const [experienceLevel, setExperienceLevel] = useState(0);
@@ -48,29 +48,7 @@ function Preferences() {
         // Handle network or server errors
         setError("An error occurred while saving preferences. Please try again later.");
       }
-    //   try {
-    //     const response = await fetch("http://localhost:8000/login/", {
-    //       method: 'POST',
-    //       withCredentials: true,
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body: JSON.stringify({ experienceLevel, frequency })
-    //     });
-        
-    //     const data = await response.json();
-  
-    //     if (response.ok && data.message === "Login successful") {
-          // Redirect to the home page upon successful login
-          //navigate('/');
-    //     } else {
-    //       // Set error state with the error message
-    //       setError(data.error);
-    //     }
-    //   } catch (error) {
-    //     // Handle network or server errors
-    //     setError("An error occurred during login. Please try again later.");
-    //   }
+   
      };
   
     const handleSignUpClick = () => {
