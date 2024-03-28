@@ -35,6 +35,7 @@ function Login() {
 
       if (response.ok && data.message === "Login successful") {
         // Redirect to the home page upon successful login
+        sessionStorage.setItem('username', username);
         navigate('/');
       } else {
         // Set error state with the error message

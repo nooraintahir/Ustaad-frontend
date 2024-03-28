@@ -5,14 +5,15 @@ const LessonPlan = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch("http://localhost:8000/preferences", {
+            const name = sessionStorage.getItem('username');
+            const response = await fetch("http://localhost:8000/lessonplan", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    username: 'hassang', // Provide the actual username and password
-                    password: '1234'
+                    username: name, // Provide the actual username and password
+
                 })
             });
             
@@ -20,13 +21,13 @@ const LessonPlan = () => {
                 const data = await response.json();
                 
                 // Check if lesson plan information is available in the response
-                // if (data && data.lesson_plan_info) {
-                //     // Update the state with lesson plan information
-                //     setLessonPlanInfo(data.lesson_plan_info);
-                //     console.log(data.lesson_plan_info)
-                // } else {
-                //     console.error('Error: Lesson plan information not available');
-                // }
+                if (data && data.lesson_plan_info) {
+                    // Update the state with lesson plan information
+                    setLessonPlanInfo(data.lesson_plan_info);
+                    console.log(data.lesson_plan_info)
+                } else {
+                    console.error('Error: Lesson plan information not available');
+                }
             } else {
                 console.error('Error:', response.status);
             }
@@ -44,17 +45,17 @@ const LessonPlan = () => {
         <div>
         
             {/* Render lesson plan information */}
-            {//lessonPlanInfo && (
-                // <div>
-                //     <h2>Lesson Plan Information</h2>
-                //     <p>Date Only: {lessonPlanInfo.date_only}</p>
-                //     <p>Topic: {lessonPlanInfo.topic}</p>
-                //     <p>Difficulty: {lessonPlanInfo.difficulty}</p>
-                //     <p>Questions to Attempt: {lessonPlanInfo.questions_to_attempt}</p>
-                //     <p>Questions Attempted: {lessonPlanInfo.questions_attempted}</p>
-                // </div>
-           // )}
-            }
+            {lessonPlanInfo && (
+                <div>
+                    <h2>Lesson Plan Information</h2>
+                    <p>Date Only: {lessonPlanInfo.date_only}</p>
+                    <p>Topic: {lessonPlanInfo.topic}</p>
+                    <p>Difficulty: {lessonPlanInfo.difficulty}</p>
+                    <p>Questions to Attempt: {lessonPlanInfo.questions_to_attempt}</p>
+                    <p>Questions Attempted: {lessonPlanInfo.questions_attempted}</p>
+                </div>
+           )}
+            
         </div>
     );
 };

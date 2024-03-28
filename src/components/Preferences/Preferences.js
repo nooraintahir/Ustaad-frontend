@@ -24,13 +24,15 @@ function Preferences() {
       e.preventDefault();
   
       try {
+        const username = sessionStorage.getItem('username');
         const response = await fetch("http://localhost:8000/preferences", {
           method: 'POST',
           withCredentials: true,
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ experienceLevel, frequency })
+          body: JSON.stringify({ experienceLevel, frequency, username, // Provide the actual username and password
+        })
         });
         
         const data = await response.json();

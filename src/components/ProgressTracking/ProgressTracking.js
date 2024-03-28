@@ -424,14 +424,14 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
 
         
             try {
-                const response = await fetch("http://localhost:8000/login/", {
+                const name = sessionStorage.getItem('username');
+                const response = await fetch("http://localhost:8000/progress", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        username: 'zainab', // Provide the actual username and password
-                        password: '1234'
+                        username: name,
                     })
                 });
                 
