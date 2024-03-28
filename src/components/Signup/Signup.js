@@ -49,7 +49,7 @@ function Signup() {
 
       if (response.ok && data.message === "Signup successful") {
         // Redirect to the home page upon successful signup
-        navigate('/');
+        navigate('/preferences');
       } else {
         // Set error state with the error message
         setError(data.error);
@@ -61,7 +61,7 @@ function Signup() {
   };
 
   const handleLoginClick = () => {
-    navigate('/login'); // Navigate to the login page
+    navigate('/'); // Navigate to the login page
   };
 
   return (

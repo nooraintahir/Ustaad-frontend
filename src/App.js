@@ -14,6 +14,8 @@ import AddQuestion from "./components/AddQuestion/AddQuestion";
 import Compiler from "./components/Compiler/Compiler";
 import Questions from "./components/Questions/Questions";
 import ProgressTracking from "./components/ProgressTracking/ProgressTracking";
+import Preferences from "./components/Preferences/Preferences";
+import LessonPlan from "./components/LessonPlan/LessonPlan";
 import {
   BrowserRouter as Router,
   Route,
@@ -59,6 +61,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/add-question" element={<AddQuestion />} />
             <Route path="/trackprogress" element={<ProgressTracking />} />
+            <Route path="/preferences" element={<Preferences />} />
+            <Route path="/lessonplan" element={<LessonPlan />} />
 
             <Route path="/:topic/:difficulty" element={<Compiler /*details={details}*/ />} />
             <Route path="/:topic" element={<Questions />} />

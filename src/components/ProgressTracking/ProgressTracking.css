@@ -1,7 +1,11 @@
+body {
+    overflow-x: hidden;
+}
+
 .chart-container {
     position: absolute;
     top: 100px; /* Adjust as needed */
-    left: 220px;
+    left: 15%;
     display: flex;
     
     z-index: 1 !important; /* Adjust as needed */
@@ -18,7 +22,7 @@
 .chart-Function {
     position: absolute;
     top: 640px; /* Adjust as needed */
-    left: 220px;
+    left: 15%;
     z-index: 1 !important; /* Adjust as needed */
 }
 
@@ -33,7 +37,7 @@
 .chart-Loops {
     position: absolute;
     top: 1190px; /* Adjust as needed */
-    left: 220px;
+    left: 15%;
    /* Adjust as needed */
 }
 

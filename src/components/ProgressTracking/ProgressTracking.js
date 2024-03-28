@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import axios from 'axios';
 import Chart from 'chart.js/auto';
 import Particle from "../Particle";
@@ -8,6 +9,7 @@ import './ProgressTracking.css';
 const ProgressTracking = ({currentStep, totalSteps}) => {
     const [variablesData, setVariablesData] = useState(null);
     const [attemptedCounts, setAttemptedCounts] = useState(null);
+    const navigate = useNavigate();
     
     useEffect(() => {
         fetchData();
@@ -25,63 +27,12 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
         }
     }, [attemptedCounts]);
 
+    const handleLessonPlanClick = () => {
+        // Handle signup button click logic
+        navigate('/lessonplan');
+    };
 
-//     fetch('http://localhost:8000/login/')
-//   .then(response => {
-//     if (!response.ok) {
-//       throw new Error('Network response was not ok');
-//     }
-//     return response.json();
-//   })
-//   .then(data => {
-//     // Access the attempted counts JSON data
-//     const attemptedCounts = data && data.attempted_counts ? JSON.parse(data.attempted_counts) : null;
-    
-//     if (attemptedCounts) {
-//       // Now you can use the attemptedCounts object in your frontend code
-//       console.log(attemptedCounts);
-//       // You can process the data further here
-//     } else {
-//       console.error('Error: Attempted counts data not available');
-//     }
-//   })
-//   .catch(error => console.error('Error:', error));
-    // useEffect(() => {
-    //     // Fetch data from Django backend
-    //     axios.post("http://localhost:8000/login/", {
-    //         // Provide necessary data for authentication if required
-    //          //username: 'zainab',
-    //          //password: '1234'
-    //     })
-    //     .then(response => {
-    //         // Extract variables data from response
-    //         const variablesData = response.data.variables;
-    //         setVariablesData(variablesData);
-    //         console.log(variablesData)
-    //         // Call function to create chart
-    //         createChart(variablesData);
-    //     })
-    //     .catch(error => {
-    //         console.error('Error fetching data:', error);
-    //     });
-    // }, []);
-    // try {
-    //     // Send a request to the Django backend to authenticate and fetch variables data
-    //     const response = await axios.post("http://localhost:8000/api/login/", {
-    //       username: 'your_username',
-    //       password: 'your_password'
-    //     });
-      
-    //     // Extract variables data from the response
-    //     const variablesData = response.data.variables;
-      
-    //     // Now you can use variablesData to perform further operations, such as displaying in a chart
-      
-    //     console.log(variablesData); // For testing purposes, you can log the data to see it in the console
-    //   } catch (error) {
-    //     console.error('Error:', error);
-    //   }
-      
+
     const createChart = (data) => {
         // Use Chart.js to create a chart
         if (data && data.Variables) {
@@ -508,7 +459,7 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
     return (
         <div>
             <div>
-           <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '520px', left: '22%', transform: 'translateX(-22%)' }}>Variables</h2>
+           <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '35%', left: '21%', transform: 'translateX(-21%)' }}>Variables</h2>
         <div className="chart-container">
         <canvas id="myChart" width="400" height="400"></canvas>
        
@@ -516,7 +467,7 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
         </div>
        
         <div>
-        <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '-40px', marginLeft: '-23%', transform: 'translateX(23%)' }}>Arithmetic</h2>
+        <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '-2.9%', marginLeft: '-23%', transform: 'translateX(23%)' }}>Arithmetic</h2>
         </div>
         <div className="chart-containerarithmetic">
 
@@ -525,7 +476,7 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
    
 
         <div>
-        <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '520px', left: '22%', transform: 'translateX(-22%)' }}>Functions</h2>
+        <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '34%', left: '21%', transform: 'translateX(-21%)' }}>Functions</h2>
 
     <div className="chart-Function">
 
@@ -534,7 +485,7 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
     </div>
 
     <div>
-    <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '-40px', marginLeft: '-23%', transform: 'translateX(23%)' }}>If-else Statements</h2>
+    <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '-2.3%', marginLeft: '-24%', transform: 'translateX(24%)' }}>If-else Statements</h2>
 
     <div className="chart-Ifelse">
   <canvas id="myChart4" width="400" height="400"></canvas>
@@ -542,7 +493,7 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
     </div>
 
     <div>
-        <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '520px', left: '22%', transform: 'translateX(-22%)' }}>Loops</h2>
+        <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '34%', left: '21%', transform: 'translateX(-21%)' }}>Loops</h2>
 
     <div className="chart-Loops">
 
@@ -551,13 +502,15 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
     </div>
 
     <div>
-    <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '-40px', marginLeft: '-23%', transform: 'translateX(23%)' }}>Arrays</h2>
-
+    <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '-2.3%', marginLeft: '-23%', transform: 'translateX(23%)' }}>Arrays</h2>
     <div className="chart-Arrays">
   <canvas id="myChart6" width="400" height="400"></canvas>
     </div>
     </div>
     
+    <div className="signup-link">
+    <p className="text-white mt-2">Go to Today's Lesson Plan? <Button variant="link" className="text-primary" onClick={handleLessonPlanClick}>Lesson Plan</Button></p>
+    </div>
 
  <div>
     <Particle />
