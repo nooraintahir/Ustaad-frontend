@@ -66,9 +66,9 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
                     scales: {
                         y: {
                             beginAtZero: true,
-                            max: 10,
+                            max: 50,
                             ticks: {
-                                stepSize: 2,
+                                stepSize: 10,
                                 color: 'white'
                                
                             }
@@ -132,10 +132,10 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
                     scales: {
                         y: {
                             beginAtZero: true,
-                            max: 10,
+                            max: 50,
 
                             ticks: {
-                                stepSize: 2,
+                                stepSize: 10,
                                 color:'white', // Set the step size between each tick
                                 // Add more customization as needed
                             }
@@ -196,10 +196,10 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
                     scales: {
                         y: {
                             beginAtZero: true,
-                            max: 10,
+                            max: 50,
 
                             ticks: {
-                                stepSize: 2,
+                                stepSize: 10,
                                 color:'white', // Set the step size between each tick
                                 // Add more customization as needed
                             }
@@ -260,10 +260,10 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
                     scales: {
                         y: {
                             beginAtZero: true,
-                            max: 10,
+                            max: 50,
 
                             ticks: {
-                                stepSize: 2,
+                                stepSize: 10,
                                 color:'white', // Set the step size between each tick
                                 // Add more customization as needed
                             }
@@ -324,10 +324,10 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
                     scales: {
                         y: {
                             beginAtZero: true,
-                            max: 10,
+                            max: 50,
 
                             ticks: {
-                                stepSize: 2,
+                                stepSize: 10,
                                 color:'white', // Set the step size between each tick
                                 // Add more customization as needed
                             }
@@ -388,10 +388,10 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
                     scales: {
                         y: {
                             beginAtZero: true,
-                            max: 10,
+                            max: 50,
 
                             ticks: {
-                                stepSize: 2,
+                                stepSize: 10,
                                 color:'white', // Set the step size between each tick
                                 // Add more customization as needed
                             }
@@ -459,7 +459,7 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
     return (
         <div>
             <div>
-           <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '35%', left: '21%', transform: 'translateX(-21%)' }}>Variables</h2>
+           <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '39%', left: '21%', transform: 'translateX(-25%)' }}>Variables</h2>
         <div className="chart-container">
         <canvas id="myChart" width="400" height="400"></canvas>
        
@@ -467,7 +467,7 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
         </div>
        
         <div>
-        <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '-2.9%', marginLeft: '-23%', transform: 'translateX(23%)' }}>Arithmetic</h2>
+        <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '-2.9%', marginLeft: '5%', transform: 'translateX(23%)' }}>Arithmetic</h2>
         </div>
         <div className="chart-containerarithmetic">
 
@@ -476,7 +476,7 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
    
 
         <div>
-        <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '34%', left: '21%', transform: 'translateX(-21%)' }}>Functions</h2>
+        <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '38%', left: '21%', transform: 'translateX(-25%)' }}>Functions</h2>
 
     <div className="chart-Function">
 
@@ -485,7 +485,7 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
     </div>
 
     <div>
-    <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '-2.3%', marginLeft: '-24%', transform: 'translateX(24%)' }}>If-else Statements</h2>
+    <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '-2.7%', marginLeft: '5%', transform: 'translateX(24%)' }}>If-else Statements</h2>
 
     <div className="chart-Ifelse">
   <canvas id="myChart4" width="400" height="400"></canvas>
@@ -493,7 +493,7 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
     </div>
 
     <div>
-        <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '34%', left: '21%', transform: 'translateX(-21%)' }}>Loops</h2>
+        <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '38%', left: '21%', transform: 'translateX(-25%)' }}>Loops</h2>
 
     <div className="chart-Loops">
 
@@ -502,14 +502,14 @@ const ProgressTracking = ({currentStep, totalSteps}) => {
     </div>
 
     <div>
-    <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '-2.3%', marginLeft: '-23%', transform: 'translateX(23%)' }}>Arrays</h2>
+    <h2 style={{ color: 'white', fontSize: '24px', textAlign: 'center', marginTop: '-2.7%', marginLeft: '5%', transform: 'translateX(23%)' }}>Arrays</h2>
     <div className="chart-Arrays">
   <canvas id="myChart6" width="400" height="400"></canvas>
     </div>
     </div>
     
     <div className="signup-link">
-    <p className="text-white mt-2">Go to Today's Lesson Plan? <Button variant="link" className="text-primary" onClick={handleLessonPlanClick}>Lesson Plan</Button></p>
+    <p className="text-white mt-4">Go to Today's Lesson Plan? <Button variant="link" className="text-primary" onClick={handleLessonPlanClick}>Lesson Plan</Button></p>
     </div>
 
  <div>

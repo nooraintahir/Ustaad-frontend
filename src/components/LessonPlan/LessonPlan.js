@@ -49,24 +49,25 @@ const LessonPlan = () => {
 
 
     return (
-        <div className="login-container">
+        <div className="login-container" style={{marginTop:"30px"}}>
           <Container fluid className="login-background">
             <Row className="justify-content-center align-items-center">
               <Col md={6}>
-              <h1 className="project-heading mb-4 mt-3" >Todays's 
+              <h1 className="project-heading mb-4 mt-5" >Today's 
               <strong className="purple">  Lesson Plan </strong></h1>
               
 
-            <div classname = "login-container2">
+            <div  style={{justifyContent:"center", marginLeft:"20%", marginTop:"10%"}}>
 
             {lessonPlanInfo && (
-                     <div className="tech-icons">
+                     <div className="tech-icons" style={{justifyContent:"center"}}>
                      
                      
-                     <p>Topic: {lessonPlanInfo.topic}</p>
-                     <p>Difficulty: {lessonPlanInfo.difficulty}</p>
-                     <p>Questions to Attempt: {lessonPlanInfo.questions_to_attempt}</p>
-                     <p>Questions Attempted: {lessonPlanInfo.questions_attempted}</p>
+                    <p style={{ fontSize: '0.5em' }}>Topic: {lessonPlanInfo.topic}</p>
+                    <p style={{ fontSize: '0.5em' }}>Difficulty: {lessonPlanInfo.difficulty}</p>
+                    <p style={{ fontSize: '0.5em' }}>Questions to Attempt: {lessonPlanInfo.questions_to_attempt}</p>
+                    <p style={{ fontSize: '0.5em' }}>Questions Attempted: {lessonPlanInfo.questions_attempted}</p>
+
                  </div>
                         )}
             </div>

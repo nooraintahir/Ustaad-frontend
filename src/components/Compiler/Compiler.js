@@ -14,7 +14,7 @@ function Compiler() {
   const [details, setDetails] = useState([]);
   const [question, setQuestion]=useState([])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const { difficulty } = useParams();
+  const { difficulty, topic } = useParams();
   const [width, setWidth] = useState(1200);
   const [cppCode, setCppCode] = useState("");
   const [compilerResult, setCompilerResult] = useState(null);
@@ -23,6 +23,9 @@ function Compiler() {
   const [conversation, setConversation] = useState([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [compilerResponse, setCompilerResponse] = useState("");
+  const username = sessionStorage.getItem('username');
+
+
 
   useEffect(() => {
     setWidth(window.innerWidth);
@@ -31,11 +34,10 @@ function Compiler() {
 
   const fetchQuestions = async () => {
     try {
-      const name = sessionStorage.getItem('username');
       const response = await axios.post("http://localhost:8000/userquestions", {
-        topic: "Arrays",
-        difficulty: "Easy",
-        username: name,
+        topic,
+        difficulty,
+        username,
       });
       setQuestion(response.data);
     } catch (error) {
@@ -44,12 +46,8 @@ function Compiler() {
   };
   
   const handleRunCode = () => {
-    // Assuming userCode contains the Python code entered by the user
     const encodedCode = encodeURIComponent(cppCode);
-
-    // Construct the URL for the Python Tutor iframe
     const pythonTutorURL = `http://pythontutor.com/iframe-embed.html#code=${encodedCode}&cumulative=false&py=cpp_g%2B%2B9.3.0`;
-    // Set the iframe source
     document.getElementById('pythonTutorIframe').src = pythonTutorURL;
   };
 
@@ -77,48 +75,46 @@ function Compiler() {
   const smartCompiler = async (e) => {
     e.preventDefault();
     setCheckingStatus(true);
-    setConversation([
-      ...conversation,
-      { role: "user", content: "Code" + cppCode + "Question" + details[currentQuestionIndex].question },
-    ]);
+    const userInputString = userInput.toString(); // Convert userInput to string
+    const updatedUserInput = [
+      { role: "user", content: "Question" + question + "Code" + cppCode },
+    ];
+    setUserInput(updatedUserInput);
     setIsProcessing(true);
-
+  
     try {
-      await axios.post("http://localhost:8000/update-score", {
-        questionId: details[currentQuestionIndex].id,
-      });
-  
       const response = await axios.post("http://localhost:8000/smartcompiler", {
-        user_input: userInput,
-        code: cppCode,
-        question: details[currentQuestionIndex].question,
+        user_input: userInputString, // Send userInputString instead of userInput
       });
-  
-      setConversation([
-        ...conversation,
-        { role: "user", content: userInput },
-        { role: "assistant", content: response.data.message },
-      ]);
   
       setCompilerResponse(response.data.message);
+      if (response.data.message.includes("Yes")) {
+        await axios.post("http://localhost:8000/update-score", {
+          question,
+          topic,
+          difficulty,
+          username,
+        });
+    }
     } catch (error) {
       console.error("Error sending message:", error);
       setCompilerResponse("Submission failed. Please try again.");
     } finally {
       setIsProcessing(false);
+      setCheckingStatus(false);
+      setUserInput(updatedUserInput); // Reset userInput with updatedUserInput
+      
     }
-    compileCode();
-    setCheckingStatus(false);
-    setUserInput("");
   };
-
+  
+  
   return (
     <div>
       <Container fluid className="qcontent">
-        <Row style={{ justifyContent: "center", padding: "10px" }}>
-          <Col md={7}>
+        <Row  style={{ justifyContent: "center", padding:"10px",marginLeft: "20px", marginRight: "20px" }}>
+        <Col md={6}>
             <div className="centered-content">
-              <h3>{question}</h3>
+              <h4>{question}</h4>
               <AceEditor
                 mode="c_cpp"
                 theme="chrome"
@@ -133,12 +129,77 @@ function Compiler() {
                 showGutter={true}
                 showPrintMargin={true}
               />
+              <Button
+              onClick={handleRunCode}
+              variant="primary"
+              style={{ maxWidth: "250px", marginTop: "20px", marginRight:"100px" }}
+              disabled={checkingStatus }
+              title="Opens a debugger to help you understand the code better by parsing it line by line."
+            >
+              Debug
+            </Button>
+
+            <Button
+              onClick={smartCompiler}
+              variant="primary"
+              style={{ maxWidth: "250px", marginTop: "20px", marginRight:"100px" }}
+              disabled={checkingStatus}
+              title="Compiles the code and submits it to check if it is correct."
+
+            >
+              Submit
+            </Button>
+
+            <Button
+              onClick={compileCode}
+              variant="primary"
+              style={{ maxWidth: "250px", marginTop: "20px" , marginRight:"10px"}}
+              disabled={checkingStatus}
+              title="Compiles the code and displays the output."
+            >
+              Compile
+            </Button>
             </div>
-            {/* Buttons and compiler output */}
+            <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+              <pre>
+                {compilerResult && !compilerResult.cpuTime ? (
+                  <div >
+                    <h3>Error:</h3>
+                    <pre style={{ textAlign:"left"}}>{compilerResult.output}</pre>
+                  </div>
+                ) : null}
+                {compilerResult && compilerResult.cpuTime ? (
+                  <div>
+                    <h3>Output:</h3>
+                    <pre style={{ textAlign:"left"}}>{compilerResult.output}</pre>
+                  </div>
+                ) : null}
+              </pre>
+            </div>
+            <div style={{ textAlign: "center", marginTop: "20px" }}>
+              {compilerResponse && compilerResponse.includes("Yes") && compilerResult && compilerResult.run_status ? (
+                <p>Great, Your answer is correct!</p>
+              ) : compilerResponse && compilerResponse.includes("No") ? (
+                <p>Your answer is wrong!</p>
+              ) : compilerResponse && compilerResponse.includes("Yes") && compilerResult && !compilerResult.cpuTime ? (
+                <p>You are on the right track but there are some issues! Please debug your code</p>
+              ) : null}
+            </div>
           </Col>
         </Row>
       </Container>
+      <div style={{ justifyContent: "center" }}>
+        <iframe
+          id="pythonTutorIframe"
+          width="800"
+          height="450"
+          title="Python Tutor"
+        ></iframe>
+            <Particle/>
+
+      </div>
     </div>
+
   );
 }
 
