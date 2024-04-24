@@ -83,17 +83,19 @@ function Compiler() {
     setIsProcessing(true);
   
     try {
+      compileCode();
       const response = await axios.post("http://localhost:8000/smartcompiler", {
         user_input: userInputString, // Send userInputString instead of userInput
       });
   
       setCompilerResponse(response.data.message);
       if (response.data.message.includes("Yes")) {
+        console.log(question, topic, difficulty, username)
         await axios.post("http://localhost:8000/update-score", {
-          question,
           topic,
           difficulty,
           username,
+          question
         });
     }
     } catch (error) {
