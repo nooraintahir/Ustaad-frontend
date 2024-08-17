@@ -75,9 +75,8 @@ function Compiler() {
   const smartCompiler = async (e) => {
     e.preventDefault();
     setCheckingStatus(true);
-    const userInputString = userInput.toString(); // Convert userInput to string
     const updatedUserInput = [
-      { role: "user", content: "Question" + question + "Code" + cppCode },
+      { role: "user", content: "Question: " + question + " Code: " + cppCode },
     ];
     setUserInput(updatedUserInput);
     setIsProcessing(true);
@@ -85,7 +84,7 @@ function Compiler() {
     try {
       compileCode();
       const response = await axios.post("http://localhost:8000/smartcompiler", {
-        user_input: userInputString, // Send userInputString instead of userInput
+        user_input: updatedUserInput, // Send userInputString instead of userInput
       });
   
       setCompilerResponse(response.data.message);
